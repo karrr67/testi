@@ -4,6 +4,18 @@ import os
 DATA_FILE = "tasks.json"
 
 
+def load_tasks():
+    if not os.path.exists(DATA_FILE):
+        return []
+    with open(DATA_FILE, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def save_tasks(tasks):
+    with open(DATA_FILE, "w", encoding="utf-8") as f:
+        json.dump(tasks, f, ensure_ascii=False, indent=2)
+
+
 def add_task(tasks, title):
     task = {"id": len(tasks) + 1, "title": title, "done": False}
     tasks.append(task)
@@ -11,6 +23,7 @@ def add_task(tasks, title):
 
 
 def list_tasks(tasks):
+    """Показывает все задачи."""
     if not tasks:
         print("Список пуст.")
         return
@@ -18,7 +31,9 @@ def list_tasks(tasks):
         mark = "✔" if t["done"] else "✘"
         print(f"[{mark}] {t['id']}. {t['title']}")
 
+
 def main():
+    tasks = load_tasks()
 
     while True:
         print("\n1. Показать  2. Добавить  3. Выход")
