@@ -36,6 +36,16 @@ def list_tasks(tasks):
 
 def mark_undone(tasks, task_id):
     """Снимает отметку выполнения."""
+def find_task(tasks, task_id):
+    """Находит задачу по id. Возвращает словарь или None."""
+    for t in tasks:
+        if t["id"] == task_id:
+            return t
+    return None
+
+
+def mark_done(tasks, task_id):
+    """Отмечает задачу выполненной."""
     task = find_task(tasks, task_id)
     if not task:
         print(f"Задача {task_id} не найдена.")
@@ -43,6 +53,9 @@ def mark_undone(tasks, task_id):
     task["done"] = False
     save_tasks(tasks)
     print(f"Возвращено в работу: [{task_id}] {task['title']}")
+    task["done"] = True
+    save_tasks(tasks)
+    print(f"Выполнено: [{task_id}] {task['title']}")
 
 
 def delete_task(tasks, task_id):
