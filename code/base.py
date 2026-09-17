@@ -5,6 +5,7 @@ DATA_FILE = "tasks.json"
 
 
 def load_tasks():
+    """Загружает задачи из файла."""
     if not os.path.exists(DATA_FILE):
         return []
     with open(DATA_FILE, "r", encoding="utf-8") as f:
@@ -12,11 +13,13 @@ def load_tasks():
 
 
 def save_tasks(tasks):
+    """Сохраняет задачи в файл."""
     with open(DATA_FILE, "w", encoding="utf-8") as f:
         json.dump(tasks, f, ensure_ascii=False, indent=2)
 
 
 def add_task(tasks, title):
+    """Добавляет новую задачу."""
     task = {"id": len(tasks) + 1, "title": title, "done": False}
     tasks.append(task)
     print(f"Добавлено: {title}")
