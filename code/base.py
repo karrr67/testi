@@ -84,6 +84,17 @@ def count_tasks(tasks):
     print(f"Всего: {total} | Выполнено: {done} | Осталось: {total - done}")
     return total, done, total - done
 
+def rename_task(tasks, task_id, new_title):
+    """Переименовывает задачу."""
+    task = find_task(tasks, task_id)
+    if not task:
+        print(f"Задача {task_id} не найдена.")
+        return
+    old = task["title"]
+    task["title"] = new_title
+    save_tasks(tasks)
+    print(f"Переименовано: '{old}' -> '{new_title}'")
+
 def main():
     tasks = load_tasks()
 
