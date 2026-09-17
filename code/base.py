@@ -67,7 +67,18 @@ def delete_task(tasks, task_id):
     tasks.remove(task)
     save_tasks(tasks)
     print(f"Удалено: [{task_id}] {task['title']}")
-    
+
+def rename_task(tasks, task_id, new_title):
+    """Переименовывает задачу."""
+    task = find_task(tasks, task_id)
+    if not task:
+        print(f"Задача {task_id} не найдена.")
+        return
+    old = task["title"]
+    task["title"] = new_title
+    save_tasks(tasks)
+    print(f"Переименовано: '{old}' -> '{new_title}'")
+
 def main():
     tasks = load_tasks()
 
