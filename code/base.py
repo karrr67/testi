@@ -67,7 +67,16 @@ def delete_task(tasks, task_id):
     tasks.remove(task)
     save_tasks(tasks)
     print(f"Удалено: [{task_id}] {task['title']}")
-    
+
+def list_done(tasks):
+    """Показывает только выполненные задачи."""
+    items = [t for t in tasks if t["done"]]
+    if not items:
+        print("Нет выполненных задач.")
+        return
+    for t in items:
+        print(f"[✔] {t['id']}. {t['title']}")
+            
 def main():
     tasks = load_tasks()
 
