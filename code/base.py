@@ -95,6 +95,19 @@ def rename_task(tasks, task_id, new_title):
     save_tasks(tasks)
     print(f"Переименовано: '{old}' -> '{new_title}'")
 
+def search_tasks(tasks, query):
+    """Ищет задачи по подстроке в названии."""
+    q = query.lower()
+    found = [t for t in tasks if q in t["title"].lower()]
+    if not found:
+        print("Ничего не найдено.")
+        return []
+    for t in found:
+        mark = "✔" if t["done"] else "✘"
+        print(f"[{mark}] {t['id']}. {t['title']}")
+    return found
+
+
 def main():
     tasks = load_tasks()
 
