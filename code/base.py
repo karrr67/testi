@@ -77,6 +77,13 @@ def list_done(tasks):
     for t in items:
         print(f"[✔] {t['id']}. {t['title']}")
             
+def count_tasks(tasks):
+    """Возвращает статистику: всего / выполнено / осталось."""
+    total = len(tasks)
+    done = sum(1 for t in tasks if t["done"])
+    print(f"Всего: {total} | Выполнено: {done} | Осталось: {total - done}")
+    return total, done, total - done
+
 def main():
     tasks = load_tasks()
 
