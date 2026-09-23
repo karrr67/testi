@@ -87,6 +87,15 @@ def rename_task(tasks, task_id, new_title):
     task["title"] = new_title
     save_tasks(tasks)
     print(f"Переименовано: '{old}' -> '{new_title}'")
+    
+def list_pending(tasks):
+    """Показывает только невыполненные задачи."""
+    items = [t for t in tasks if not t["done"]]
+    if not items:
+        print("Нет активных задач.")
+        return
+    for t in items:
+        print(f"[✘] {t['id']}. {t['title']}")
 
 def main():
     tasks = load_tasks()
